@@ -9,14 +9,14 @@ namespace FirstResponsiveWebAppKlein.Controllers
 {
     public class HomeController : Controller
     {
-        public String Name = "";
-        public String BD = "";
+        public string Name = "";
+        public string BirthYear = "";
 
         [HttpGet]
         public IActionResult Index()
         {
             ViewBag.Name = "";
-            ViewBag.BD = "";
+            ViewBag.BirthYear = "";
             return View();
         }
         [HttpPost]
@@ -24,7 +24,7 @@ namespace FirstResponsiveWebAppKlein.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.BD = model.Greeting();
+                ViewBag.BD = model.Greeting(Name, BirthYear);
             }
             else
             {

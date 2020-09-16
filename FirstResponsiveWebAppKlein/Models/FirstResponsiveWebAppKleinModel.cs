@@ -34,31 +34,44 @@ namespace FirstResponsiveWebAppKlein.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Please enter your birthday.")]
         public DateTime BirthYear { get; set; }
-        public string userName = "";
-        public string userBirthday = "";
 
-        public String Greeting()
+        public FirstResponsiveWebAppKleinModel()
         {
-            if (Regex.IsMatch(Name, @"^[\p{L}]+$"))
+            
+        }
+
+        public FirstResponsiveWebAppKleinModel(string name, DateTime birthyear)
+        {
+            if (Regex.IsMatch(name, @"^[\p{L}]+$"))
             {
-                string userName = Name;
+                Name = name;
             }
             else
             {
                 ErrorMessage = "Alphabet only for name please";
             }
-            DateTime birthday;
-            if (DateTime.TryParseExact(BirthYear.ToString(), "MM/dd/yyyy", new CultureInfo("en-US"), DateTimeStyles.None, out birthday))
+            if (DateTime.TryParseExact(birthyear.ToString(), "MM/dd/yyyy", new CultureInfo("en-US"), DateTimeStyles.None, out birthyear))
             {
-                string userBirthday = birthday.ToString();
+                BirthYear = birthyear;
+                string birthDay = BirthYear.ToString();
             }
             else
             {
                 ErrorMessage = "Date only in this format: 'MM/dd/yyyy'.";
             }
-            string greeting = "Hello " + Name + ", your birthday is " + BirthYear.ToString() + ".";
+            
+        }
+        
+
+        public string Greeting(string name, string birthDay)
+        {
+            Name = name;
+            birthDay = BirthYear.ToString();
+
+            string greeting = "Hello " + name + ", your birthday is " + birthDay + ".";
             return greeting;
         }
+
     }
 
 }
